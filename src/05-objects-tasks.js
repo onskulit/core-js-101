@@ -115,59 +115,54 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
+class Builder {
+  constructor() {
+    this.result = '';
+  }
 
-const cssSelectorBuilder = {
-/*   result: '', */
+  element(value) {
+    this.result += value;
+    return this;
+  }
 
-  element(/* value */) {
-    throw new Error('Not implemented');
-    /* this.result += value;
-    return this; */
-  },
+  id(value) {
+    this.result += `#${value}`;
+    return this;
+  }
 
-  id(/* value */) {
-    throw new Error('Not implemented');
-    /* this.result += `#${value}`;
-    return this; */
-  },
+  class(value) {
+    this.result += `.${value}`;
+    return this;
+  }
 
-  class(/* value */) {
-    throw new Error('Not implemented');
-    /* this.result += `.${value}`;
-    return this; */
-  },
+  attr(value) {
+    this.result += `[${value}]`;
+    return this;
+  }
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
-    /* this.result += `[${value}]`;
-    return this; */
-  },
+  pseudoClass(value) {
+    this.result += `:${value}`;
+    return this;
+  }
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
-    /* this.result += `:${value}`;
-    return this; */
-  },
+  pseudoElement(value) {
+    this.result += `::${value}`;
+    return this;
+  }
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
-    /* this.result += `::${value}`;
-    return this; */
-  },
-
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
-    /* this.result += `${selector1.stringify()} ${combinator} ${selector2.stringify()}`;
-    return this; */
-  },
+  combine(selector1, combinator, selector2) {
+    this.result += `${selector1.stringify()} ${combinator} ${selector2.stringify()}`;
+    return this;
+  }
 
   stringify() {
-    throw new Error('Not implemented');
-    /* const finalResult = this.result;
+    const finalResult = this.result;
     this.result = '';
-    return finalResult; */
-  },
-};
+    return finalResult;
+  }
+}
+
+const cssSelectorBuilder = new Builder();
 
 
 module.exports = {
